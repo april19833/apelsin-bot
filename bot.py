@@ -1,8 +1,15 @@
+import os
 from telegram import Update
-from telegram.ext import Application, MessageHandler, ContextTypes, filters
+from telegram.ext import (
+    Application,
+    MessageHandler,
+    ContextTypes,
+    filters,
+)
 
-TOKEN = "8343671858:AAEFHlF8lgT6q_oOr2rVCs9MVNhJbhVCM90"
 ADMIN_ID = 379198558
+TOKEN = os.getenv("8343671858:AAEFHlF8lgT6q_oOr2rVCs9MVNhJbhVCM90")
+
 
 async def forward_to_admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.forward_message(
@@ -11,9 +18,15 @@ async def forward_to_admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
         message_id=update.message.message_id,
     )
 
-app = Application.builder().token(TOKEN).build()
 
-app.add_handler(MessageHandler(filters.PHOTO, forward_to_admin))
-app.add_handler(MessageHandler(filters.Document.IMAGE, forward_to_admin))
+def main():
+    app = Application.builder().token(TOKEN).build()
 
-app.run_polling()
+    app.add_handler(MessageHandler(filters.PHOTO, forward_to_admin))
+    app.add_handler(MessageHandler(filters.Document.IMAGE, forward_to_admin))
+
+    app.run_polling(drop_pending_updates=True)
+
+
+if __name__ == "__main__":
+    main()
