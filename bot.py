@@ -8,7 +8,7 @@ from telegram.ext import (
 )
 
 ADMIN_ID = 379198558
-TOKEN = os.getenv("8343671858:AAEFHlF8lgT6q_oOr2rVCs9MVNhJbhVCM90")
+TOKEN = ("8343671858:AAEFHlF8lgT6q_oOr2rVCs9MVNhJbhVCM90")
 
 
 async def forward_to_admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
